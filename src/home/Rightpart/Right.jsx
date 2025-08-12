@@ -1,103 +1,3 @@
-// import React, { useEffect } from "react";
-// import Chatuser from "./Chatuser";
-// import Messages from "./Messages";
-// import Typesend from "./Typesend";
-// import useConversation from "../../zustand/useConversation.js";
-// import { useAuth } from "../../context/AuthProvider.jsx";
-
-// function Right() {
-//   const { selectedConversation, setSelectedConversation } = useConversation();
-
-//   useEffect(() => {
-//     return () => setSelectedConversation(null);
-//   }, [setSelectedConversation]);
-
-//   return (
-//     <div style={{
-//       flex: 1,
-//       display: "flex",
-//       flexDirection: "column",
-//       backgroundColor: "#ffffff",
-//       height: "100vh"
-//     }}>
-//       {!selectedConversation ? (
-//         <NoChatSelected />
-//       ) : (
-//         <>
-//           <Chatuser />
-//           <div style={{ 
-//             flex: 1, 
-//             overflowY: "auto", 
-//             padding: "16px 20px",
-//             backgroundColor: "#f8f9fa"
-//           }}>
-//             <Messages />
-//           </div>
-//           <Typesend />
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Right;
-
-// const NoChatSelected = () => {
-//   const [authUser] = useAuth();
-//   return (
-//     <div style={{
-//       flex: 1,
-//       display: "flex",
-//       alignItems: "center",
-//       justifyContent: "center",
-//       backgroundColor: "#f8f9fa",
-//       textAlign: "center",
-//       padding: "40px"
-//     }}>
-//       <div style={{
-//         maxWidth: "400px"
-//       }}>
-//         <div style={{
-//           width: "120px",
-//           height: "120px",
-//           backgroundColor: "#e9ecef",
-//           borderRadius: "50%",
-//           display: "flex",
-//           alignItems: "center",
-//           justifyContent: "center",
-//           margin: "0 auto 24px",
-//           fontSize: "48px",
-//           color: "#adb5bd"
-//         }}>
-//           💬
-//         </div>
-//         <h2 style={{ 
-//           fontSize: "24px", 
-//           fontWeight: "600",
-//           color: "#212529",
-//           marginBottom: "12px",
-//           margin: 0
-//         }}>
-//           Welcome, {authUser?.user?.fullname || "User"}!
-//         </h2>
-//         <p style={{
-//           fontSize: "16px",
-//           color: "#6c757d",
-//           lineHeight: "1.5",
-//           margin: "12px 0 0 0"
-//         }}>
-//           Select a conversation from the sidebar to start chatting with your team members.
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-
-
-
-
-
 import React, { useEffect } from "react";
 import Chatuser from "./Chatuser";
 import Messages from "./Messages";
@@ -117,9 +17,9 @@ function Right() {
       flex: 1,
       display: "flex",
       flexDirection: "column",
-      backgroundColor: "#fff",
+      backgroundColor: "#fafafa",
       height: "100vh",
-      borderLeft: "1px solid #ddd"
+      borderLeft: "1px solid #e5e5e7"
     }}>
       {!selectedConversation ? (
         <NoChatSelected />
@@ -127,10 +27,10 @@ function Right() {
         <>
           <Chatuser />
           <div style={{ 
-            flex: 1, 
-            overflowY: "auto", 
-            padding: "16px 20px",
-            backgroundColor: "#f8f9fa"
+            flex: 1,
+            overflowY: "auto",
+            padding: "25px 25px",
+            backgroundColor: "#fafafa"
           }}>
             <Messages />
           </div>
@@ -151,41 +51,44 @@ const NoChatSelected = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#f8f9fa",
+      backgroundColor: "#fafafa",
       textAlign: "center",
-      padding: "40px"
+      padding: "60px 40px"
     }}>
       <div style={{
-        maxWidth: "400px"
+        maxWidth: "500px"
       }}>
         <div style={{
-          width: "120px",
-          height: "120px",
-          backgroundColor: "#e9ecef",
+          width: "140px",
+          height: "140px",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          margin: "0 auto 24px",
-          fontSize: "48px",
-          color: "#adb5bd"
+          margin: "0 auto 32px",
+          fontSize: "60px",
+          color: "white",
+          boxShadow: "0 12px 40px rgba(102, 126, 234, 0.3)"
         }}>
           💬
         </div>
         <h2 style={{ 
-          fontSize: "24px", 
-          fontWeight: "600",
-          color: "#212529",
-          marginBottom: "12px",
-          margin: 0
+          fontSize: "32px",
+          fontWeight: "700",
+          color: "#1d1d1f",
+          marginBottom: "16px",
+          margin: "0 0 16px 0",
+          letterSpacing: "-0.8px"
         }}>
           Welcome, {authUser?.user?.fullname || "User"}!
         </h2>
         <p style={{
-          fontSize: "16px",
-          color: "#6c757d",
-          lineHeight: "1.5",
-          margin: "12px 0 0 0"
+          fontSize: "18px",
+          color: "#86868b",
+          lineHeight: "1.6",
+          margin: "0",
+          fontWeight: "400"
         }}>
           Select a conversation from the sidebar to start chatting with your team members.
         </p>
@@ -193,3 +96,4 @@ const NoChatSelected = () => {
     </div>
   );
 };
+

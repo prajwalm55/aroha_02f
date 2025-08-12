@@ -4,12 +4,13 @@ import Users from "./Users";
 import Logout from "./Logout";
 import axios from "axios";
 import { useAuth } from "../../context/AuthProvider";
-import { FiMessageSquare, FiUsers, FiFolder, FiArchive, FiSettings } from "react-icons/fi";
+import { FiMessageSquare, FiUsers, FiFolder, FiArchive, FiUser, FiEdit } from "react-icons/fi";
 
 function Left() {
   const [authUser] = useAuth();
   const [userData, setUserData] = useState(null);
   const [activeTab, setActiveTab] = useState("chats");
+
 
   useEffect(() => {
     if (authUser?._id) {
@@ -25,92 +26,143 @@ function Left() {
     { id: "work", icon: FiUsers, label: "Work" },
     { id: "friends", icon: FiFolder, label: "Friends" },
     { id: "news", icon: FiArchive, label: "News" },
-    { id: "settings", icon: FiSettings, label: "Settings" },
+    { id: "archive", icon: FiArchive, label: "Archive chats" },
+    { id: "profile", icon: FiUser, label: "Profile" },
+    { id: "edit", icon: FiEdit, label: "Edit" },
   ];
 
   return (
-    <div style={{ display: "flex", height: "100vh", fontFamily: "Inter, sans-serif" }}>
-      {/* Sidebar */}
+    <div style={{ 
+      display: "flex", 
+      height: "100vh", 
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
+      backgroundColor: "#202022" 
+    }}>
+      {/* Left Navigation Sidebar */}
       <div
         style={{
-          width: "70px",
-          backgroundColor: "#0F0F0F", // black sidebar
+          width: "100px",
+          backgroundColor: "#202022",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px 0",
+          padding: "16px 0",
+          gap: "4px",
+          flexShrink: 0
         }}
       >
-        {/* Profile Initial */}
+        {/* Profile Avatar */}
         <div
           style={{
-            width: "40px",
-            height: "40px",
-            backgroundColor: "#8b5cf6",
-            borderRadius: "12px",
+            width: "56px",
+            height: "56px",
+            borderRadius: "2px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "18px",
-            fontWeight: "bold",
+            fontSize: "32px",
+            fontWeight: "600",
             color: "white",
-            marginBottom: "40px",
+            marginBottom: "36px",
+            cursor: "pointer"
           }}
         >
-          {userData?.name?.charAt(0) || "U"}
+          <span style={{ transform: "rotate(-15deg)" }}>M</span>
         </div>
 
-        {/* Navigation Icons - center aligned */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "12px" }}>
-          {navItems.map((item) => {
-            const IconComponent = item.icon;
-            const isActive = activeTab === item.id;
-            return (
+        {/* Navigation Items */}
+        {navItems.map((item) => {
+          const IconComponent = item.icon;
+          const isActive = activeTab === item.id;
+          return (
+            <div
+              key={item.id}
+              onClick={() => setActiveTab(item.id)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+                marginBottom: "12px",
+                transition: "all 0.2s ease"
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.children[0].style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+                  e.currentTarget.children[0].style.color = "#ffffff";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.children[0].style.backgroundColor = "transparent";
+                  e.currentTarget.children[0].style.color = "#8e8e93";
+                }
+              }}
+            >
               <div
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
                 style={{
-                  width: "40px",
-                  height: "40px",
+                  width: "48px",
+                  height: "48px",
                   borderRadius: "10px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  cursor: "pointer",
-                  backgroundColor: isActive ? "#8b5cf6" : "transparent",
-                  color: isActive ? "white" : "#9ca3af",
-                  transition: "all 0.2s ease",
+                  backgroundColor: isActive ? "#f9fafc" : "transparent",
+                  color: isActive ? "#202022" : "#8e8e93",
+                  transition: "all 0.2s ease"
                 }}
               >
-                <IconComponent size={20} />
+                <IconComponent size={18} />
               </div>
-            );
-          })}
-        </div>
+              <span
+                style={{
+                  fontSize: "10px",
+                  color: isActive ? "#f9fafc" : "#8e8e93",
+                  marginTop: "4px",
+                  textAlign: "center",
+                  lineHeight: "1.2"
+                }}
+              >
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
 
-        {/* Logout at bottom */}
-        <div style={{ marginTop: "auto" }}>
+        {/* Bottom Icons */}
+        <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
           <Logout />
         </div>
       </div>
 
-      {/* Chat List */}
-      <div style={{ flex: 1, backgroundColor: "#f9fafb", display: "flex", flexDirection: "column" }}>
-        {/* Header */}
-        <div style={{ padding: "20px", borderBottom: "1px solid #e5e7eb" }}>
-          <h2 style={{ fontSize: "20px", fontWeight: "600", color: "#111827", margin: "0 0 6px 0" }}>
-            {activeTab === "chats" ? "Design chat" : navItems.find((item) => item.id === activeTab)?.label}
-          </h2>
-          <p style={{ fontSize: "14px", color: "#6b7280", margin: 0 }}>23 members, 10 online</p>
+      {/* Main Chat Area - Contact List Area */}
+      <div style={{ 
+        width: "480px",
+        minWidth: "460px",
+        maxWidth: "500px",
+        backgroundColor: "#f9fafc", 
+        display: "flex", 
+        flexDirection: "column",
+        borderTopLeftRadius: "12px",
+        flexShrink: 0
+      }}>
+        {/* Search Bar */}
+        <div style={{ 
+          padding: "20px 20px 12px 20px",
+          backgroundColor: "#f9fafc"
+        }}>
+          <div style={{ transform: "scale(0.9)" }}>
+            <Search />
+          </div>
         </div>
 
-        {/* Search */}
-        <div style={{ padding: "10px 20px", borderBottom: "1px solid #e5e7eb" }}>
-          <Search />
-        </div>
-
-        {/* Users */}
-        <div style={{ flex: 1, overflowY: "auto" }}>
+        {/* Users List */}
+        <div style={{ 
+          flex: 1, 
+          overflowY: "auto",
+          backgroundColor: "#f9fafc",
+          padding: "0 16px"
+        }}>
           <Users />
         </div>
       </div>

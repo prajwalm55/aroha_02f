@@ -19,7 +19,6 @@ function Login() {
       email: data.email,
       password: data.password,
     };
-    // console.log(userInfo);
     axios
       .post("/api/user/login", userInfo)
       .then((response) => {
@@ -35,88 +34,81 @@ function Login() {
         }
       });
   };
-  return (
-    <>
-      <div className="flex h-screen items-center justify-center">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="border border-white px-6 py-2 rounded-md space-y-3 w-96"
-        >
-          <h1 className="text-2xl text-center">
-            Chat<span className="text-green-500 font-semibold">App</span>
-          </h1>
-          <h2 className="text-xl text-white font-bold">Login</h2>
-          <br />
 
-          {/* Email */}
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-4 h-4 opacity-70"
-            >
-              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-            </svg>
-            <input
-              type="text"
-              className="grow"
-              placeholder="Email"
-              {...register("email", { required: true })}
-            />
-          </label>
+  return (
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white rounded-2xl shadow-md px-8 py-8 space-y-6 w-96 border border-gray-200"
+      >
+        <h1 className="text-3xl text-gray-800 font-semibold text-center">
+          Chat<span className="text-green-500 font-bold">App</span>
+        </h1>
+        <h2 className="text-lg text-gray-500 text-center">Sign in to your account</h2>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm text-gray-600 mb-1">Email</label>
+          <input
+            type="text"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-400 outline-none text-white placeholder-gray-400 bg-gray-800"
+            placeholder="Enter your email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
           {errors.email && (
-            <span className="text-red-500 text-sm font-semibold">
-              This field is required
+            <span className="text-red-500 text-sm mt-1 block">
+              {errors.email.message}
             </span>
           )}
-          {/* Password */}
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-4 h-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <input
-              type="password"
-              className="grow"
-              placeholder="password"
-              {...register("password", { required: true })}
-            />
-          </label>
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className="block text-sm text-gray-600 mb-1">Password</label>
+          <input
+            type="password"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-400 outline-none text-white placeholder-gray-400 bg-gray-800"
+            placeholder="Enter your password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
           {errors.password && (
-            <span className="text-red-500 text-sm font-semibold">
-              This field is required
+            <span className="text-red-500 text-sm mt-1 block">
+              {errors.password.message}
             </span>
           )}
-          {/* Text & Button */}
-          <div className="flex justify-between">
-            <p>
-              New user?
-              <Link
-                to="/signup"
-                className="text-blue-500 underline cursor-pointer ml-1"
-              >
-                Signup
-              </Link>
-            </p>
-            <input
-              type="submit"
-              value="Login"
-              className="text-white bg-green-500 px-2 py-1 cursor-pointer rounded-lg"
-            />
-          </div>
-        </form>
-      </div>
-    </>
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-between items-center">
+          <p className="text-gray-500 text-sm">
+            New user?
+            <Link
+              to="/signup"
+              className="text-green-500 hover:underline cursor-pointer ml-1"
+            >
+              Signup
+            </Link>
+          </p>
+          <input
+            type="submit"
+            value="Login"
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-xl cursor-pointer transition"
+          />
+        </div>
+      </form>
+    </div>
   );
 }
 

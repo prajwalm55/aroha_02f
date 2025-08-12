@@ -27,9 +27,9 @@ function Logout() {
     <div
       onClick={handleLogout}
       style={{
-        width: "40px",
-        height: "40px",
-        borderRadius: "10px",
+        width: "32px",
+        height: "32px",
+        borderRadius: "8px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -37,18 +37,19 @@ function Logout() {
         color: "#8e8e93",
         transition: "all 0.2s ease",
         opacity: loading ? 0.6 : 1,
-        pointerEvents: loading ? "none" : "auto"
+        pointerEvents: loading ? "none" : "auto",
+        backgroundColor: "transparent"
       }}
       onMouseEnter={(e) => {
-        e.target.style.backgroundColor = "#3e3e42";
-        e.target.style.color = "#ff6b6b";
+        e.target.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+        e.target.style.color = "#ff453a";
       }}
       onMouseLeave={(e) => {
         e.target.style.backgroundColor = "transparent";
         e.target.style.color = "#8e8e93";
       }}
     >
-      <BiLogOutCircle size={22} />
+      <BiLogOutCircle size={18} />
     </div>
   );
 }

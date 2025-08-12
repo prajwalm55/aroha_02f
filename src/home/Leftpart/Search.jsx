@@ -31,8 +31,8 @@ function Search() {
           left: "16px",
           top: "50%",
           transform: "translateY(-50%)",
-          color: "#9ca3af",
-          fontSize: "14px",
+          color: "#86868b",
+          fontSize: "16px",
         }}
       />
       <input
@@ -41,17 +41,29 @@ function Search() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
-          width: "100%",
-          padding: "10px 16px 10px 40px",
-          backgroundColor: "#f3f4f6",
-          border: "1px solid #e5e7eb",
-          borderRadius: "8px",
-          color: "#111827",
-          fontSize: "14px",
+          width: "240px",
+          padding: "12px 16px 12px 42px",
+          backgroundColor: "rgb(219, 221, 259)" ,
+          border: "none",
+          borderRadius: "12px",
+          color: "black",
+          fontSize: "15px",
           outline: "none",
           fontFamily: "inherit",
+          transition: "all 0.2s ease",
+        }}
+        onFocus={(e) => {
+          e.target.style.backgroundColor = "#6366e3";
+        }}
+        onBlur={(e) => {
+          e.target.style.backgroundColor = "#7678ed";
         }}
       />
+      <style jsx>{`
+        input::placeholder {
+          color: rgb(221, 204, 255);
+        }
+      `}</style>
     </form>
   );
 }

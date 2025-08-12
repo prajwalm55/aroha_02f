@@ -27,7 +27,8 @@ function Messages() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%"
+        height: "100%",
+        backgroundColor: "#fafafa"
       }}>
         <Loading />
       </div>
@@ -40,7 +41,8 @@ function Messages() {
       style={{
         height: "100%",
         overflowY: "auto",
-        paddingRight: "4px"
+        paddingRight: "8px",
+        backgroundColor: "#fafafa"
       }}
     >
       <style jsx>{`
@@ -51,37 +53,44 @@ function Messages() {
           background: transparent;
         }
         div::-webkit-scrollbar-thumb {
-          background-color: rgba(0,0,0,0.2);
+          background-color: #d1d1d6;
           border-radius: 3px;
         }
         div::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(0,0,0,0.3);
+          background-color: #c7c7cc;
         }
       `}</style>
 
       {messages.length > 0 ? (
         <>
-          {/* Date separator - you can customize this based on your needs */}
+          {/* Date separator */}
           <div style={{
             display: "flex",
             justifyContent: "center",
-            margin: "20px 0"
+            margin: "30px 0 25px 0"
           }}>
             <span style={{
-              fontSize: "12px",
-              color: "#6c757d",
-              backgroundColor: "#f8f9fa",
-              padding: "4px 12px",
-              borderRadius: "12px",
-              border: "1px solid #e9ecef"
+              fontSize: "13px",
+              color: "#86868b",
+              backgroundColor: "#ffffff",
+              padding: "8px 16px",
+              borderRadius: "16px",
+              border: "1px solid #f0f0f5",
+              fontWeight: "500",
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)"
             }}>
-              Today
+              {new Date().toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
             </span>
           </div>
 
           {messages.map((message, index) => (
             <div 
-              key={message._id} 
+              key={message._id}
               ref={index === messages.length - 1 ? lastMsgRef : null}
             >
               <Message message={message} />
@@ -96,33 +105,38 @@ function Messages() {
           justifyContent: "center",
           height: "100%",
           textAlign: "center",
-          color: "#6c757d"
+          padding: "40px"
         }}>
           <div style={{
-            width: "80px",
-            height: "80px",
-            backgroundColor: "#f8f9fa",
+            width: "100px",
+            height: "100px",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
             borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: "16px",
-            fontSize: "32px"
+            marginBottom: "24px",
+            fontSize: "40px",
+            color: "white",
+            boxShadow: "0 8px 32px rgba(102, 126, 234, 0.3)"
           }}>
             👋
           </div>
           <h3 style={{
-            fontSize: "18px",
-            fontWeight: "500",
-            color: "#212529",
-            margin: "0 0 8px 0"
+            fontSize: "24px",
+            fontWeight: "600",
+            color: "#1d1d1f",
+            margin: "0 0 12px 0",
+            letterSpacing: "-0.5px"
           }}>
             Say Hi to start the conversation
           </h3>
           <p style={{
-            fontSize: "14px",
-            color: "#6c757d",
-            margin: 0
+            fontSize: "16px",
+            color: "#86868b",
+            margin: 0,
+            lineHeight: "1.5",
+            fontWeight: "400"
           }}>
             Send a message to begin chatting
           </p>
@@ -133,7 +147,3 @@ function Messages() {
 }
 
 export default Messages;
-
-
-
-

@@ -12,7 +12,9 @@ function Users() {
         justifyContent: "center",
         alignItems: "center",
         height: "200px",
-        color: "#8e8e93"
+        color: "#86868b",
+        fontSize: "16px",
+        fontWeight: "500"
       }}>
         Loading contacts...
       </div>
@@ -23,9 +25,9 @@ function Users() {
     <div style={{
       height: "100%",
       overflowY: "auto",
-      paddingRight: "8px"
+      paddingBottom: "20px"
     }}>
-      {/* Hide scrollbar but keep functionality */}
+      {/* Custom scrollbar styling */}
       <style jsx>{`
         div::-webkit-scrollbar {
           width: 6px;
@@ -34,21 +36,42 @@ function Users() {
           background: transparent;
         }
         div::-webkit-scrollbar-thumb {
-          background-color: #3e3e42;
+          background-color: #d1d1d6;
           border-radius: 3px;
         }
         div::-webkit-scrollbar-thumb:hover {
-          background-color: #4e4e52;
+          background-color: #c7c7cc;
         }
       `}</style>
-      
+             
       {allUsers.length === 0 ? (
         <div style={{
           textAlign: "center",
-          padding: "40px 20px",
-          color: "#8e8e93"
+          padding: "60px 20px",
+          color: "#86868b"
         }}>
-          <p>No contacts found</p>
+          <div style={{
+            fontSize: "48px",
+            marginBottom: "16px",
+            opacity: "0.5"
+          }}>
+            💬
+          </div>
+          <h3 style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            color: "#1d1d1f",
+            marginBottom: "8px"
+          }}>
+            No contacts found
+          </h3>
+          <p style={{
+            fontSize: "14px",
+            color: "#86868b",
+            margin: 0
+          }}>
+            Start a conversation by searching for users
+          </p>
         </div>
       ) : (
         allUsers.map((user, index) => (
