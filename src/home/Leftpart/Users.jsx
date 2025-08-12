@@ -4,20 +4,57 @@ import useGetAllUsers from "../../context/useGetAllUsers";
 
 function Users() {
   const [allUsers, loading] = useGetAllUsers();
-  console.log(allUsers);
-  return (
-    <div>
-      <h1 className="px-8 py-2 text-white font-semibold bg-slate-800 rounded-md">
-        Messages
-      </h1>
-      <div
-        className="py-2 flex-1 overflow-y-auto"
-        style={{ maxHeight: "calc(84vh - 10vh)" }}
-      >
-        {allUsers.map((user, index) => (
-          <User key={index} user={user} />
-        ))}
+
+  if (loading) {
+    return (
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "200px",
+        color: "#8e8e93"
+      }}>
+        Loading contacts...
       </div>
+    );
+  }
+
+  return (
+    <div style={{
+      height: "100%",
+      overflowY: "auto",
+      paddingRight: "8px"
+    }}>
+      {/* Hide scrollbar but keep functionality */}
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          width: 6px;
+        }
+        div::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        div::-webkit-scrollbar-thumb {
+          background-color: #3e3e42;
+          border-radius: 3px;
+        }
+        div::-webkit-scrollbar-thumb:hover {
+          background-color: #4e4e52;
+        }
+      `}</style>
+      
+      {allUsers.length === 0 ? (
+        <div style={{
+          textAlign: "center",
+          padding: "40px 20px",
+          color: "#8e8e93"
+        }}>
+          <p>No contacts found</p>
+        </div>
+      ) : (
+        allUsers.map((user, index) => (
+          <User key={user._id || index} user={user} />
+        ))
+      )}
     </div>
   );
 }
