@@ -55,3 +55,40 @@ const useSendMessage = () => {
 };
 
 export default useSendMessage;
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import useConversation from "../zustand/useConversation.js";
+// import axios from "axios";
+
+// const useSendMessage = () => {
+//   const [loading, setLoading] = useState(false);
+//   const { selectedConversation } = useConversation(); // ❌ Removed setMessages
+
+//   const sendMessages = async (message) => {
+//     setLoading(true);
+//     try {
+//       await axios.post(
+//         `/api/message/send/${selectedConversation._id}`,
+//         { message }
+//       );
+//       // ❌ Do NOT update setMessages manually here
+//       // The socket listener will handle updating messages for both sender & receiver
+//     } catch (error) {
+//       console.log("Error in send messages", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return { loading, sendMessages };
+// };
+
+// export default useSendMessage;
+
